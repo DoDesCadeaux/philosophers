@@ -44,7 +44,7 @@ typedef struct s_philo
 	unsigned long long	eat_time;
 	pthread_mutex_t		*my_fork;
 	pthread_mutex_t		*right_fork;
-	pthread_t			philo;
+	pthread_t			philo_t;
 }	t_philo;
 
 typedef struct s_data
@@ -64,10 +64,17 @@ typedef struct s_data
 	t_philo				**ph;
 }	t_data;
 
+//INIT DATA
+t_data				*init_gobal_data(int argc, char **argv);
+
 //UTILS
 long long			ft_atoi(const char *str);
+unsigned long long	ft_get_time(void);
 
 //PROTECTION
 int					ft_args_protection(int argc, char **argv);
+
+//PRINT STATUS
+void				print_status(t_data *data, t_philo *philo, int status);
 
 #endif

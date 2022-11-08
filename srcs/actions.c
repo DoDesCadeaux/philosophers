@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dduraku <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 16:19:20 by dduraku           #+#    #+#             */
-/*   Updated: 2022/11/01 16:19:22 by dduraku          ###   ########.fr       */
+/*   Created: 2022/11/08 18:32:41 by dduraku           #+#    #+#             */
+/*   Updated: 2022/11/08 18:32:43 by dduraku          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int argc, char **argv)
+void	sleeping(t_data *data, t_philo *philo)
 {
-	int		protection;
-	t_data	*data;
-
-	protection = ft_args_protection(argc, argv);
-	if (protection != 0)
-		return (FAILURE);
-	data = init_gobal_data(argc, argv);
-	if (!data)
-		return (FAILURE);
-	return (SUCCESS);
+	print_status(data, philo, SLEEP);
+	usleep(data->time_to_sleep);
 }

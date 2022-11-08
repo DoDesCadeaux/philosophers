@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dduraku <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 16:19:20 by dduraku           #+#    #+#             */
-/*   Updated: 2022/11/01 16:19:22 by dduraku          ###   ########.fr       */
+/*   Created: 2022/11/08 16:29:03 by dduraku           #+#    #+#             */
+/*   Updated: 2022/11/08 16:29:05 by dduraku          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+unsigned long long	ft_get_time(void)
 {
-	int		protection;
-	t_data	*data;
+	static struct timeval	time;
 
-	protection = ft_args_protection(argc, argv);
-	if (protection != 0)
-		return (FAILURE);
-	data = init_gobal_data(argc, argv);
-	if (!data)
-		return (FAILURE);
-	return (SUCCESS);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
