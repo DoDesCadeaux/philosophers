@@ -12,6 +12,19 @@
 
 #include "../../include/philo.h"
 
+void	ft_sleep(unsigned long long time_to_sleep)
+{
+	unsigned long long actual;
+
+	actual = ft_get_time();
+	while (1)
+	{
+		if (ft_get_time() - actual >= time_to_sleep)
+			break ;
+		usleep(50);
+	}
+}
+
 unsigned long long	ft_get_time(void)
 {
 	static struct timeval	time;

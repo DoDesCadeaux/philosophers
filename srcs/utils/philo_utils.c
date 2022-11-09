@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-#include <limits.h>
 
 static int	ft_forward(char *str, int *signe, int *neg)
 {

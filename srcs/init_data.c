@@ -12,7 +12,7 @@
 
 #include "../include/philo.h"
 
-t_philo	*init_philo(int	philo_name)
+static t_philo	*init_philo(int	philo_name)
 {
 	t_philo *philo;
 
@@ -25,7 +25,7 @@ t_philo	*init_philo(int	philo_name)
 	return (philo);
 }
 
-void	init_philo_fork(t_data *data, int philo_name)
+static void	init_philo_fork(t_data *data, int philo_name)
 {
 	//Si il y'a que 1 philo, fork gauche = la premiere, donc la sienne.
 	if (data->nb_philo == 1)
@@ -47,7 +47,7 @@ void	init_philo_fork(t_data *data, int philo_name)
 	}
 }
 
-int	init_philos_data(t_data *data)
+static int	init_philos_data(t_data *data)
 {
 	int	i;
 
@@ -76,7 +76,7 @@ int	init_philos_data(t_data *data)
 	return (SUCCESS);
 }
 
-int	init_table_forks(t_data *data)
+static int	init_table_forks(t_data *data)
 {
 	int	protection;
 	int	i;
@@ -96,7 +96,7 @@ int	init_table_forks(t_data *data)
 	return (SUCCESS);
 }
 
-int	protected_init(t_data *data)
+static int	protected_init(t_data *data)
 {
 	int	protection;
 
@@ -112,6 +112,7 @@ int	protected_init(t_data *data)
 	return (SUCCESS);
 }
 
+//Init toutes les donnees globales du projet
 t_data	*init_gobal_data(int argc, char **argv)
 {
 	t_data	*data;
@@ -134,6 +135,7 @@ t_data	*init_gobal_data(int argc, char **argv)
 	printf("Nb philo : %d\n time to die : %d\n time to eat : %d\n"
 		   " time to sleep : %d\n min eat : %d\n is dead : %d\n philo name : %d\n START TIME : %lld\n",
 		   	data->nb_philo, data->time_to_die, data->time_to_eat, data->time_to_sleep, data->min_eat, data->is_dead, data->ph_name, data->start_time);
+	//Init les mutex des forks, les mutex des prints et les data des philos. Le tout en etant protegé
 	protection = protected_init(data);
 	if (protection != 0)
 		return (NULL);

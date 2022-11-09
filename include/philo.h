@@ -54,7 +54,7 @@ typedef struct s_data
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					min_eat;
-	int					all_eated;
+	int					philo_eated;
 	int					total_eat;
 	int					is_dead;
 	int					ph_name;
@@ -70,6 +70,7 @@ t_data				*init_gobal_data(int argc, char **argv);
 //UTILS
 long long			ft_atoi(const char *str);
 unsigned long long	ft_get_time(void);
+void				ft_sleep(unsigned long long time_to_sleep);
 
 //PROTECTION
 int					ft_args_protection(int argc, char **argv);
