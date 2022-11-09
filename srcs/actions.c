@@ -14,21 +14,21 @@
 
 void	sleeping(t_data *data, t_philo *philo)
 {
-	print_status(data, philo, SLEEP);
+	print_output(data, philo, SLEEP);
 	ft_sleep(data->time_to_sleep);
 }
 
 void	eating(t_data *data, t_philo *philo)
 {
-	print_status(data, philo, EAT);
+	print_output(data, philo, EAT);
 	philo->eat_time = ft_get_time();
-	if (data->min_eat != -1 && (data->philo_eated < data->nb_philo))
+	if (data->min_eat != -1 && data->philo_eated < data->nb_philo)
 	{
 		data->philo_eated++;
 		if (data->philo_eated == data->nb_philo)
 		{
-			data->total_eat++;
 			data->philo_eated = 0;
+			data->total_eat++;
 		}
 		ft_sleep(data->time_to_eat);
 	}
@@ -36,9 +36,9 @@ void	eating(t_data *data, t_philo *philo)
 
 int	dead(t_data *data, t_philo *philo)
 {
-	if (ft_get_time() > (philo->eat_time + data->time_to_die))
+	if (ft_get_time() >= (philo->eat_time + data->time_to_die))
 	{
-		print_status(data, philo, DEAD);
+		print_output(data, philo, DEAD);
 		data->is_dead = 1;
 		return (1);
 	}
@@ -50,9 +50,9 @@ void	take_left_fork(t_data *data, t_philo *philo)
 	if (data->is_dead == 1)
 		return ;
 	pthread_mutex_lock(philo->my_fork);
-	print_status(data, philo, FORK);
+	print_output(data, philo, FORK);
 	if (data->nb_philo == 1)
-		ft_sleep(data->time_to_die + 1);
+		ft_sleep(data->time_to_die + 10);
 }
 
 void	take_right_fork(t_data *data, t_philo *philo)
@@ -60,5 +60,5 @@ void	take_right_fork(t_data *data, t_philo *philo)
 	if (data->is_dead == 1)
 		return ;
 	pthread_mutex_lock(philo->right_fork);
-	print_status(data, philo, FORK);
+	print_output(data, philo, FORK);
 }

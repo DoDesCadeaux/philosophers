@@ -28,7 +28,11 @@ INCLUDE_PATH	=	./includes
 SRCS			=	$(PROTEC)args_protection.c	\
 					$(UTILS)philo_utils.c		\
 					$(UTILS)time.c				\
+					$(UTILS)clear_threads.c		\
+					init_global_data.c			\
 					init_data.c					\
+					dinner_routine.c			\
+					actions.c					\
 					print_status.c				\
 
 MAIN			=	main.c

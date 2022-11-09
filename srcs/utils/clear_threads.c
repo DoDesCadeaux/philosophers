@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   clear_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dduraku <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 16:29:03 by dduraku           #+#    #+#             */
-/*   Updated: 2022/11/08 16:29:05 by dduraku          ###   ########.fr       */
+/*   Created: 2022/11/09 17:28:31 by dduraku           #+#    #+#             */
+/*   Updated: 2022/11/09 17:28:33 by dduraku          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	ft_sleep(unsigned long long time_to_sleep)
+int	clear_threads(t_data *data)
 {
-	unsigned long long	actual;
+	int	i;
+	int	protection;
 
-	actual = ft_get_time();
-	while (1)
+	i = 0;
+	while (i < data->nb_philo)
 	{
-		if (ft_get_time() - actual >= time_to_sleep)
-			break ;
-		usleep(100);
+		protection = pthread_mutex_destroy(&data->forks[i]);
+		if (protection != 0)
+			return (FAILURE);
+		protection = pthread_detach(data->ph[i]->philo_t);
+		if (protection != 0)
+			return (FAILURE);
+		i++;
 	}
-}
-
-unsigned long long	ft_get_time(void)
-{
-	static struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	return (SUCCESS);
 }

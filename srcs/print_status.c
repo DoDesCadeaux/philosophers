@@ -16,8 +16,8 @@ void	print_output(t_data *data, t_philo *philo, int status)
 {
 	unsigned long long	time;
 
-	time = ft_get_time() - data->start_time;
 	pthread_mutex_lock(&data->print);
+	time = ft_get_time() - data->start_time;
 	if (status == FORK && data->is_dead == 0)
 		printf("%lld %d has taken a fork\n", time, philo->name);
 	else if (status == EAT && data->is_dead == 0)

@@ -66,16 +66,33 @@ typedef struct s_data
 
 //INIT DATA
 t_data				*init_gobal_data(int argc, char **argv);
+t_philo				*init_philo(int philo_name);
+void				init_philo_fork(t_data *data, int philo_name);
+int					init_philos_data(t_data *data);
+int					init_table_forks(t_data *data);
+int					protected_init(t_data *data);
 
 //UTILS
 long long			ft_atoi(const char *str);
 unsigned long long	ft_get_time(void);
 void				ft_sleep(unsigned long long time_to_sleep);
+int					clear_threads(t_data *data);
 
 //PROTECTION
 int					ft_args_protection(int argc, char **argv);
 
 //PRINT STATUS
-void				print_status(t_data *data, t_philo *philo, int status);
+void				print_output(t_data *data, t_philo *philo, int status);
+
+//ACTIONS
+void				take_right_fork(t_data *data, t_philo *philo);
+void				take_left_fork(t_data *data, t_philo *philo);
+int					dead(t_data *data, t_philo *philo);
+void				eating(t_data *data, t_philo *philo);
+void				sleeping(t_data *data, t_philo *philo);
+
+//DINNER
+void				*init_dinner(void *Nullable);
+void				*end_dinner(t_data *data);
 
 #endif
