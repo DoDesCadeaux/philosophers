@@ -76,6 +76,8 @@ int					protected_init(t_data *data);
 long long			ft_atoi(const char *str);
 unsigned long long	ft_get_time(void);
 void				ft_sleep(unsigned long long time_to_sleep);
+void				create_threads(t_data *data, int i);
+void				join_threads(t_data *data, int i);
 int					clear_threads(t_data *data);
 
 //PROTECTION

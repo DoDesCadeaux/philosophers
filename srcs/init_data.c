@@ -47,7 +47,6 @@ void	init_philo_fork(t_data *data, int philo_name)
 int	init_philos_data(t_data *data)
 {
 	int	i;
-	int	protection;
 
 	data->ph = malloc(sizeof(t_philo *) * data->nb_philo);
 	if (!data->ph)
@@ -61,23 +60,8 @@ int	init_philos_data(t_data *data)
 			return (FAILURE);
 		i++;
 	}
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		init_philo_fork(data, i);
-		protection = pthread_create(&data->ph[i]->philo_t, NULL, &init_dinner, data);
-		if (protection != 0)
-			return (FAILURE);
-		i++;
-	}
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		protection = pthread_join(data->ph[i]->philo_t, NULL);
-		if (protection != 0)
-			return (FAILURE);
-		i++;
-	}
+	create_threads(data, 0);
+	join_threads(data, 0);
 	return (SUCCESS);
 }
 
