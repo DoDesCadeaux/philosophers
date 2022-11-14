@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
+# include <stdatomic.h>
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -53,13 +54,14 @@ typedef struct s_data
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					min_eat;
-	int					philo_eated;
-	int					total_eat;
+	atomic_int			min_eat;
+	atomic_int			philo_eated;
+	atomic_int			total_eat;
 	int					is_dead;
-	int					ph_name;
+	atomic_int			ph_name;
 	unsigned long long	start_time;
 	pthread_mutex_t		print;
+	pthread_mutex_t		check_total_eat;
 	pthread_mutex_t		*forks;
 	t_philo				**ph;
 }	t_data;
