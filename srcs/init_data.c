@@ -61,7 +61,6 @@ int	init_philos_data(t_data *data)
 		i++;
 	}
 	create_threads(data, 0);
-	join_threads(data, 0);
 	return (SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dduraku <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:32:41 by dduraku           #+#    #+#             */
-/*   Updated: 2022/11/08 18:32:43 by dduraku          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:26:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void	sleeping(t_data *data, t_philo *philo)
 void	eating(t_data *data, t_philo *philo)
 {
 	print_output(data, philo, EAT);
+	ft_sleep(data->time_to_eat);
 	philo->eat_time = ft_get_time();
-	if (data->min_eat != -1 && data->philo_eated < data->nb_philo)
+	pthread_mutex_lock(&data->check_total_eat);
+	philo->philo_eated++;
+	if (philo->philo_eated == data->min_eat)
 	{
-		data->philo_eated++;
-		if (data->philo_eated == data->nb_philo)
-		{
-			data->philo_eated = 0;
-			data->total_eat++;
-		}
-		ft_sleep(data->time_to_eat);
+		data->total_eat++;
+		if (data->total_eat == data->nb_philo)
+			data->is_dead = 1;
 	}
+	pthread_mutex_unlock(&data->check_total_eat);
 }
 
 int	dead(t_data *data, t_philo *philo)

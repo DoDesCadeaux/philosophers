@@ -29,7 +29,6 @@ t_data	*init_gobal_data(int argc, char **argv)
 	else
 		data->min_eat = -1;
 	data->is_dead = 0;
-	data->philo_eated = 0;
 	data->total_eat = 0;
 	data->ph_name = 0 ;
 	data->start_time = ft_get_time();

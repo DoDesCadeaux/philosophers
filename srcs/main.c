@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dduraku <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:19:20 by dduraku           #+#    #+#             */
-/*   Updated: 2022/11/01 16:19:22 by dduraku          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:17:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (FAILURE);
 	end_dinner(data);
+	join_threads(data, 0);
 	pthread_mutex_destroy(&data->print);
 	protection = clear_threads(data);
 	if (protection != 0)

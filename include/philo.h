@@ -41,23 +41,23 @@ enum e_state
 
 typedef struct s_philo
 {
-	int					name;
-	unsigned long long	eat_time;
-	pthread_mutex_t		*my_fork;
-	pthread_mutex_t		*right_fork;
-	pthread_t			philo_t;
+	int						name;
+	atomic_uint_fast64_t	eat_time;
+	int						philo_eated;
+	pthread_mutex_t			*my_fork;
+	pthread_mutex_t			*right_fork;
+	pthread_t				philo_t;
 }	t_philo;
 
 typedef struct s_data
 {
-	int					nb_philo;
+	int 				nb_philo;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
 	atomic_int			min_eat;
-	atomic_int			philo_eated;
 	atomic_int			total_eat;
-	int					is_dead;
+	atomic_int			is_dead;
 	atomic_int			ph_name;
 	unsigned long long	start_time;
 	pthread_mutex_t		print;

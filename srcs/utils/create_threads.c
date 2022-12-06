@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   create_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dduraku <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:13:34 by dduraku           #+#    #+#             */
-/*   Updated: 2022/11/09 19:13:35 by dduraku          ###   ########.fr       */
+/*   Updated: 2022/12/06 00:18:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../include/philo.h"
 
 void	join_threads(t_data *data, int i)
