@@ -4,7 +4,7 @@
 
 NAME	= philo
 CC 		= gcc
-CFLAGS	= -Wall -Wextra -Werror -pthread
+CFLAGS	= -Wall -Wextra -Werror -pthread -fsanitize=thread
 DFLAGS	= -MMD -MF $(@:.o=.d)
 AUTHOR	= dduraku
 DATE	= 14/10/2022

@@ -15,16 +15,22 @@
 void	start_eating(t_data *data, t_philo *philo)
 {
 	if (data->nb_philo == 1)
-		take_left_fork(data, philo);
+	{
+		print_output(data, philo, FORK);
+		pthread_mutex_lock(philo->my_fork);
+		ft_sleep(data->time_to_die);
+	}
 	else
 	{
 		if (philo->name < data->nb_philo)
 		{
+			print_output(data, philo, FORK);
 			pthread_mutex_lock(philo->my_fork);
 			pthread_mutex_lock(philo->right_fork);
 		}
 		else
 		{
+			print_output(data, philo, FORK);
 			pthread_mutex_lock(philo->right_fork);
 			pthread_mutex_lock(philo->my_fork);
 		}
@@ -53,7 +59,7 @@ void	*init_dinner(void *Nullable)
 	data->ph_name++;
 	pthread_mutex_unlock(&data->check_total_eat);
 	if (philo->name % 2 == 0)
-		ft_sleep(data->time_to_eat / 2);
+		ft_sleep(100);
 	while (data->is_dead == 0)
 		start_dinner(data, philo);
 	return (NULL);
@@ -69,9 +75,9 @@ void	*end_dinner(t_data *data)
 		while (data->is_dead == 0 && i < data->nb_philo)
 		{
 			if (dead(data, data->ph[i]))
-				return NULL;
+				return (NULL);
 			i++;
 		}
 	}
-	return NULL;
+	return (NULL);
 }

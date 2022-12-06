@@ -23,15 +23,14 @@ void	eating(t_data *data, t_philo *philo)
 	print_output(data, philo, EAT);
 	ft_sleep(data->time_to_eat);
 	philo->eat_time = ft_get_time();
-	pthread_mutex_lock(&data->check_total_eat);
 	philo->philo_eated++;
-	if (philo->philo_eated == data->min_eat)
+	if (data->min_eat != -1 && philo->philo_eated == data->nb_philo)
 	{
 		data->total_eat++;
-		if (data->total_eat == data->nb_philo)
+		philo->philo_eated = 0;
+		if (data->total_eat == data->min_eat)
 			data->is_dead = 1;
 	}
-	pthread_mutex_unlock(&data->check_total_eat);
 }
 
 int	dead(t_data *data, t_philo *philo)
@@ -43,22 +42,4 @@ int	dead(t_data *data, t_philo *philo)
 		return (1);
 	}
 	return (0);
-}
-
-void	take_left_fork(t_data *data, t_philo *philo)
-{
-	if (data->is_dead == 1)
-		return ;
-	pthread_mutex_lock(philo->my_fork);
-	print_output(data, philo, FORK);
-	if (data->nb_philo == 1)
-		ft_sleep(data->time_to_die + 10);
-}
-
-void	take_right_fork(t_data *data, t_philo *philo)
-{
-	if (data->is_dead == 1)
-		return ;
-	pthread_mutex_lock(philo->right_fork);
-	print_output(data, philo, FORK);
 }

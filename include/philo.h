@@ -42,8 +42,8 @@ enum e_state
 typedef struct s_philo
 {
 	int						name;
-	atomic_uint_fast64_t	eat_time;
 	int						philo_eated;
+	atomic_uint_fast64_t	eat_time;
 	pthread_mutex_t			*my_fork;
 	pthread_mutex_t			*right_fork;
 	pthread_t				philo_t;
@@ -51,7 +51,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	int 				nb_philo;
+	int					nb_philo;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
@@ -78,6 +78,7 @@ int					protected_init(t_data *data);
 long long			ft_atoi(const char *str);
 unsigned long long	ft_get_time(void);
 void				ft_sleep(unsigned long long time_to_sleep);
+void				ft_usleep(long int time_in_ms);
 void				create_threads(t_data *data, int i);
 void				join_threads(t_data *data, int i);
 int					clear_threads(t_data *data);
@@ -89,7 +90,6 @@ int					ft_args_protection(int argc, char **argv);
 void				print_output(t_data *data, t_philo *philo, int status);
 
 //ACTIONS
-void				take_right_fork(t_data *data, t_philo *philo);
 void				take_left_fork(t_data *data, t_philo *philo);
 int					dead(t_data *data, t_philo *philo);
 void				eating(t_data *data, t_philo *philo);
